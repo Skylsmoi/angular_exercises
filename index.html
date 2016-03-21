@@ -1,0 +1,44 @@
+<!doctype html>
+<html ng-app="gemStore">
+
+  <head>
+    <meta charset="UTF-8"> 
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+  </head>
+
+  <body class="container" ng-controller="StoreController as store">
+    <div class="list-group">
+      <div class="list-group-item" ng-repeat="product in store.products | orderBy : '-price'">
+        <h3>
+          name : {{product.name}}
+          <em class="pull-right">price : {{product.price | currency}}</em>
+        </h3>
+        <button ng-show="product.canPurchase">Add to Cart</button>
+        <div ng-hide="product.canPurchase">Out of Stock</div>
+
+        <!-- Image Gallery  -->
+        <div class="gallery" ng-show="product.images.length">
+          <div class="img-wrap">
+            <img ng-src="{{product.images[0]}}" />
+          </div>
+          <ul class="img-thumbnails clearfix">
+            <li class="small-image pull-left thumbnail" ng-repeat="image in product.images">
+              <img ng-src="{{image}}" />
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+
+<!--
+    <p>Name: <input type="text" ng-model="name"></p>
+    <p ng-bind="name">bru</p>
+-->
+
+  </body>
+</html>
